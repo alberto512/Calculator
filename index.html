@@ -1,7 +1,32 @@
 <!DOCTYPE>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="style.css"></link>
   </head>
   <body>
+    <div id="container_screen">
+      <div id="screen">0</div>
+    </div>
+    <div id="container_buttons">
+      <div id="buttons">
+        <button class="button" id="num_7" onclick="return guardarNumero(7)">7</button>
+        <button class="button" id="num_8" onclick="return guardarNumero(8)">8</button>
+        <button class="button" id="num_9" onclick="return guardarNumero(9)">9</button>
+        <button class="button" id="division" onclick="return guardarOperando('/')">/</button>
+        <button class="button" id="num_4" onclick="return guardarNumero(4)">4</button>
+        <button class="button" id="num_5" onclick="return guardarNumero(5)">5</button>
+        <button class="button" id="num_6" onclick="return guardarNumero(6)">6</button>
+        <button class="button" id="multiplication" onclick="return guardarOperando('*')">*</button>
+        <button class="button" id="num_1" onclick="return guardarNumero(1)">1</button>
+        <button class="button" id="num_2" onclick="return guardarNumero(2)">2</button>
+        <button class="button" id="num_3" onclick="return guardarNumero(3)">3</button>
+        <button class="button" id="substraction" onclick="return guardarOperando('-')">-</button>
+        <button class="button" id="num_0" onclick="return guardarNumero(0)">0</button>
+        <button class="button" id="dot">.</button>
+        <button class="button" id="equal" onclick="return equal()">=</button>
+        <button class="button" id="addition" onclick="return guardarOperando('+')">+</button>
+      </div>
+    </div>
+    <script src = "main.js"></script>
   </body>
 </html>
