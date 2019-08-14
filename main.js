@@ -20,7 +20,7 @@ function guardaTeclado(event){
       guardarOperando(key);
     }else if(key === '='){
       equal();
-    }else if(key >= 0 && key < 10){
+    }else if(key >= 0 && key < 10 || key == '.'){
       guardarNumero(key);
     }
   }
@@ -32,6 +32,10 @@ function guardarNumero(a){
     fin = 0;
     ini = 0;
     total = 0;
+  }
+  if(a == '.' && num.length == 0){
+    num.push(0);
+    change_text(0);
   }
   num.push(a);
   change_text(a);
@@ -49,7 +53,7 @@ function guardarOperando(a){
 
 function operate(a){
   if(operando == undefined){
-    total = parseInt(a,10);;
+    total = parseFloat(a,10);;
   }else if(operando === "+"){
     total = add(total, a);
   }else if(operando === "-"){
@@ -93,22 +97,22 @@ function equal(){
 }
 
 function add(a, b){
-  b = parseInt(b,10);
+  b = parseFloat(b,10);
   return a+b;
 }
 
 function substrac(a, b){
-  b = parseInt(b,10);
+  b = parseFloat(b,10);
   return a-b;
 }
 
 function multiply(a, b){
-  b = parseInt(b,10);
+  b = parseFloat(b,10);
   return a*b;
 }
 
 function divide(a, b){
-  b = parseInt(b,10);
+  b = parseFloat(b,10);
   return a/b;
 }
 
