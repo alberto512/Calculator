@@ -5,6 +5,7 @@ var text = '';
 var fin = 0;
 var ini = 0;
 var total = 0;
+var num_del = 0;
 
 window.onload = function(){
   document.onkeypress = guardaTeclado;
@@ -33,6 +34,12 @@ function guardarNumero(a){
     ini = 0;
     total = 0;
   }
+
+  if(num_del === 1){
+    num_del = 0;
+    num = [];
+  }
+
   if(a == '.' && num.length == 0){
     num.push(0);
     change_text(0);
@@ -44,7 +51,7 @@ function guardarNumero(a){
 function guardarOperando(a){
   if(num.length > 0){
     numeros.push(num.join(''));
-    num = [];
+    num_del = 1;
     operate(numeros[numeros.length-1]);
     operando = a;
     change_text(' ' + a + ' ');
@@ -53,7 +60,7 @@ function guardarOperando(a){
 
 function operate(a){
   if(operando == undefined){
-    total = parseFloat(a,10);;
+    total = parseFloat(a,10);
   }else if(operando === "+"){
     total = add(total, a);
   }else if(operando === "-"){
@@ -86,7 +93,7 @@ function equal(){
 
   if(fin === 0){
     change_text(' = ');
-    numeros=[];
+    numeros = [];
     fin = 1;
     change_text(total);
     if(total == Infinity){
@@ -119,4 +126,41 @@ function divide(a, b){
 function change_text(a){
   text += a;
   document.getElementById("screen").innerHTML = text;
+}
+
+function clear_screen(){
+  operando = undefined;
+  text = '';
+  fin = 1;
+  numeros = [];
+  num = [];
+  change_text(0);
+}
+
+function backspace(){
+  if(text != '' && fin == 0){
+    var char;
+    var aux;
+
+    char = text.slice(-1);
+    text = text.slice(0,-1);
+
+    if(text == ''){
+      text = 0;
+      fin = 1;
+      numeros = [];
+      num = [];
+    }else if(char === '+' || char === '-' || char === '*' || char === '/'){
+      operando = undefined;
+      aux = numeros.pop();
+      if(num_del == 0){
+        num.push(aux);
+      }
+      num_del = 0;
+    }else if((char >= 0 && char < 10 || char == '.') && char != " "){
+        num.pop();
+    }
+
+    document.getElementById("screen").innerHTML = text;
+  }
 }
