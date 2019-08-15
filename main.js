@@ -6,6 +6,7 @@ var fin = 0;
 var ini = 0;
 var total = 0;
 var num_del = 0;
+var dot = 0;
 
 window.onload = function(){
   document.onkeypress = guardaTeclado;
@@ -33,6 +34,7 @@ function guardarNumero(a){
     fin = 0;
     ini = 0;
     total = 0;
+    dot = 0;
   }
 
   if(num_del === 1){
@@ -44,14 +46,24 @@ function guardarNumero(a){
     num.push(0);
     change_text(0);
   }
-  num.push(a);
-  change_text(a);
+
+  if(a == '.'){
+    if(dot == 0){
+      dot = 1;
+      num.push(a);
+      change_text(a);
+    }
+  }else{
+    num.push(a);
+    change_text(a);
+  }
 }
 
 function guardarOperando(a){
   if(num.length > 0){
     numeros.push(num.join(''));
     num_del = 1;
+    dot = 0;
     operate(numeros[numeros.length-1]);
     operando = a;
     change_text(' ' + a + ' ');
@@ -85,6 +97,8 @@ function operate(a){
 }
 
 function equal(){
+  var aux;
+  var decimal;
   if(num.length > 0){
     numeros.push(num.join(''));
     num = [];
@@ -95,6 +109,12 @@ function equal(){
     change_text(' = ');
     numeros = [];
     fin = 1;
+    aux = total;
+    aux = Math.abs(aux);
+    decimal = aux - Math.floor(aux);
+    if(decimal.toString().length > 4){
+      total = total.toFixed(4);
+    }
     change_text(total);
     if(total == Infinity){
       document.getElementById("screen").innerHTML = "Error al dividir entre cero";
@@ -145,6 +165,11 @@ function backspace(){
     char = text.slice(-1);
     text = text.slice(0,-1);
 
+    while(char === " "){
+      char = text.slice(-1);
+      text = text.slice(0,-1);
+    }
+
     if(text == ''){
       text = 0;
       fin = 1;
@@ -154,7 +179,10 @@ function backspace(){
       operando = undefined;
       aux = numeros.pop();
       if(num_del == 0){
-        num.push(aux);
+        aux=aux.split("");
+        aux.forEach(function(element) {
+          num.push(element);
+        });
       }
       num_del = 0;
     }else if((char >= 0 && char < 10 || char == '.') && char != " "){
