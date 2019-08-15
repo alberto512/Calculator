@@ -9,24 +9,24 @@
     </div>
     <div id="container_buttons">
       <div id="buttons">
-        <button class="button" id="num_7" onclick="return guardarNumero(7)">7</button>
-        <button class="button" id="num_8" onclick="return guardarNumero(8)">8</button>
-        <button class="button" id="num_9" onclick="return guardarNumero(9)">9</button>
-        <button class="button" id="division" onclick="return guardarOperando('/')">/</button>
-        <button class="button" id="num_4" onclick="return guardarNumero(4)">4</button>
-        <button class="button" id="num_5" onclick="return guardarNumero(5)">5</button>
-        <button class="button" id="num_6" onclick="return guardarNumero(6)">6</button>
-        <button class="button" id="multiplication" onclick="return guardarOperando('*')">*</button>
-        <button class="button" id="num_1" onclick="return guardarNumero(1)">1</button>
-        <button class="button" id="num_2" onclick="return guardarNumero(2)">2</button>
-        <button class="button" id="num_3" onclick="return guardarNumero(3)">3</button>
-        <button class="button" id="substraction" onclick="return guardarOperando('-')">-</button>
-        <button class="button" id="num_0" onclick="return guardarNumero(0)">0</button>
-        <button class="button" id="dot" onclick="return guardarNumero('.')">.</button>
-        <button class="button" id="equal" onclick="return equal()">=</button>
-        <button class="button" id="addition" onclick="return guardarOperando('+')">+</button>
-        <button class="button" id="clear" onclick="return clear_screen()">Clear</button>
-        <button class="button" id="backspace" onclick="return backspace()">backspace</button>
+        <button class="button" id="delete" onclick="return clear_screen()">AC</button>
+        <button class="button" id="delete" onclick="return backspace()">←</button>
+        <button class="button" id="number" onclick="return saveNumber(7)">7</button>
+        <button class="button" id="number" onclick="return saveNumber(8)">8</button>
+        <button class="button" id="number" onclick="return saveNumber(9)">9</button>
+        <button class="button" id="operator" onclick="return saveOperator('/')">/</button>
+        <button class="button" id="number" onclick="return saveNumber(4)">4</button>
+        <button class="button" id="number" onclick="return saveNumber(5)">5</button>
+        <button class="button" id="number" onclick="return saveNumber(6)">6</button>
+        <button class="button" id="operator" onclick="return saveOperator('*')">*</button>
+        <button class="button" id="number" onclick="return saveNumber(1)">1</button>
+        <button class="button" id="number" onclick="return saveNumber(2)">2</button>
+        <button class="button" id="number" onclick="return saveNumber(3)">3</button>
+        <button class="button" id="operator" onclick="return saveOperator('-')">-</button>
+        <button class="button" id="number" onclick="return saveNumber(0)">0</button>
+        <button class="button" id="number" onclick="return saveNumber('.')">.</button>
+        <button class="button" id="operator" onclick="return equal()">=</button>
+        <button class="button" id="operator" onclick="return saveOperator('+')">+</button>
       </div>
     </div>
     <script src = "main.js"></script>

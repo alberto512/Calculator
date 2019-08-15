@@ -1,114 +1,114 @@
 var num = [];
-var operando = undefined;
-var numeros = [];
+var operator = undefined;
+var numbers = [];
 var text = '';
-var fin = 0;
-var ini = 0;
+var end = 0;
+var start = 0;
 var total = 0;
-var num_del = 0;
+var del_num = 0;
 var dot = 0;
 
 window.onload = function(){
-  document.onkeypress = guardaTeclado;
+  document.onkeypress = saveKeyboard;
 }
 
-function guardaTeclado(event){
+function saveKeyboard(event){
   var key;
   if(event.which === 13){
     equal();
   }else{
     key = String.fromCharCode(event.which);
     if(key === '+' || key === '-' || key === '*' || key === '/'){
-      guardarOperando(key);
+      saveOperator(key);
     }else if(key === '='){
       equal();
     }else if(key >= 0 && key < 10 || key == '.'){
-      guardarNumero(key);
+      saveNumber(key);
     }
   }
 }
 
-function guardarNumero(a){
-  if(fin === 1){
+function saveNumber(element){
+  if(end === 1){
     text = '';
-    fin = 0;
-    ini = 0;
+    end = 0;
+    start = 0;
     total = 0;
     dot = 0;
   }
 
-  if(num_del === 1){
-    num_del = 0;
+  if(del_num === 1){
+    del_num = 0;
     num = [];
   }
 
-  if(a == '.' && num.length == 0){
+  if(element == '.' && num.length == 0){
     num.push(0);
     change_text(0);
   }
 
-  if(a == '.'){
+  if(element == '.'){
     if(dot == 0){
       dot = 1;
-      num.push(a);
-      change_text(a);
+      num.push(element);
+      change_text(element);
     }
   }else{
-    num.push(a);
-    change_text(a);
+    num.push(element);
+    change_text(element);
   }
 }
 
-function guardarOperando(a){
+function saveOperator(element){
   if(num.length > 0){
-    numeros.push(num.join(''));
-    num_del = 1;
+    numbers.push(num.join(''));
+    del_num = 1;
     dot = 0;
-    operate(numeros[numeros.length-1]);
-    operando = a;
-    change_text(' ' + a + ' ');
+    operate(numbers[numbers.length-1]);
+    operator = element;
+    change_text(' ' + element + ' ');
   }
 }
 
-function operate(a){
-  if(operando == undefined){
-    total = parseFloat(a,10);
-  }else if(operando === "+"){
-    total = add(total, a);
-  }else if(operando === "-"){
-    if(ini === 0){
-      total = a;
+function operate(element){
+  if(operator == undefined){
+    total = parseFloat(element,10);
+  }else if(operator === "+"){
+    total = add(total, element);
+  }else if(operator === "-"){
+    if(start === 0){
+      total = element;
     }else{
-      total = substrac(total, a);
+      total = substrac(total, element);
     }
-  }else if(operando === "*"){
-    if(ini === 0){
+  }else if(operator === "*"){
+    if(start === 0){
       total = 1;
     }
-    total = multiply(total, a);
-  }else if(operando === "/"){
-    if(ini === 0){
-      total = a;
+    total = multiply(total, element);
+  }else if(operator === "/"){
+    if(start === 0){
+      total = element;
     }else{
-      total = divide(total, a);
+      total = divide(total, element);
     }
   }
-  ini = 1;
+  start = 1;
 }
 
 function equal(){
   var aux;
   var decimal;
   if(num.length > 0){
-    numeros.push(num.join(''));
+    numbers.push(num.join(''));
     num = [];
-    operate(numeros[numeros.length-1]);
+    operate(numbers[numbers.length-1]);
   }
 
-  if(fin === 0){
+  if(end === 0){
     change_text(' = ');
-    numeros = [];
-    fin = 1;
+    numbers = [];
+    end = 1;
     aux = total;
     aux = Math.abs(aux);
     decimal = aux - Math.floor(aux);
@@ -117,9 +117,9 @@ function equal(){
     }
     change_text(total);
     if(total == Infinity){
-      document.getElementById("screen").innerHTML = "Error al dividir entre cero";
+      document.getElementById("screen").innerHTML = "Error dividing by cero";
     }
-    operando = undefined;
+    operator = undefined;
   }
 }
 
@@ -149,16 +149,16 @@ function change_text(a){
 }
 
 function clear_screen(){
-  operando = undefined;
+  operator = undefined;
   text = '';
-  fin = 1;
-  numeros = [];
+  end = 1;
+  numbers = [];
   num = [];
   change_text(0);
 }
 
 function backspace(){
-  if(text != '' && fin == 0){
+  if(text != '' && end == 0){
     var char;
     var aux;
 
@@ -172,19 +172,19 @@ function backspace(){
 
     if(text == ''){
       text = 0;
-      fin = 1;
-      numeros = [];
+      end = 1;
+      numbers = [];
       num = [];
     }else if(char === '+' || char === '-' || char === '*' || char === '/'){
-      operando = undefined;
-      aux = numeros.pop();
-      if(num_del == 0){
+      operator = undefined;
+      aux = numbers.pop();
+      if(del_num == 0){
         aux=aux.split("");
         aux.forEach(function(element) {
           num.push(element);
         });
       }
-      num_del = 0;
+      del_num = 0;
     }else if((char >= 0 && char < 10 || char == '.') && char != " "){
         num.pop();
     }

@@ -5,7 +5,7 @@ html{
 }
 
 #container_screen{
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,4 +36,21 @@ html{
 .button{
   width: 100px;
   height: 100px;
+}
+
+#delete{
+  grid-column: span 2;
+  width: 200px;
+  background-color: #8D2611;
+  border-color: #8D2611;
+}
+
+#operator{
+  background-color: #ED5D00;
+  border-color: #ED5D00;
+}
+
+#number{
+  background-color: #D8D8D8;
+  border-color: #D8D8D8;
 }
